@@ -60,9 +60,10 @@
     <h2>Planowanie zużycia energii</h2>
     <div class="device-config">
       <h3>Urządzenia</h3>
-      <div class="device" draggable="true" data-duration="30">Pralka</div>
-      <div class="device" draggable="true" data-duration="45">Zmywarka</div>
-      <div class="device" draggable="true" data-duration="60">Piekarnik</div>
+      <input type="text" id="deviceSearch" placeholder="Szukaj urządzenia..." aria-label="Szukaj urządzenia" />
+      <div id="deviceList">
+      </div>
+
     </div>
 
     <div class="planner">
@@ -117,7 +118,7 @@
 
   <!-- Scripts -->
   <script src="scripts/drag-n-drop.js"></script>
-  <script src="scripts/main.js"></script>
+  <script type="module" src="scripts/main.js"></script>
 </body>
 
 </html>
