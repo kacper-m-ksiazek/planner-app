@@ -122,3 +122,77 @@
     }
   }
   
+  /* Add subtle input icon placeholders */
+.popup-content input[type="email"] {
+    background: url('icons/email.svg') no-repeat 12px center;
+    padding-left: 40px;
+    background-size: 20px 20px;
+  }
+  
+  .popup-content input[type="password"] {
+    background: url('icons/lock.svg') no-repeat 12px center;
+    padding-left: 40px;
+    background-size: 20px 20px;
+  }
+  
+  /* Smooth transitions for all inputs */
+  .popup-content input[type="email"],
+  .popup-content input[type="password"] {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  
+  /* Soft background on focus for inputs */
+  .popup-content input[type="email"]:focus,
+  .popup-content input[type="password"]:focus {
+    background-color: #e0f7f7;
+  }
+  
+  /* Button active states */
+  .popup-content button[type="submit"]:active {
+    transform: scale(0.98);
+    background-color: var(--jonquil);
+  }
+  
+  .popup-content button[type="button"]:active {
+    transform: scale(0.98);
+  }
+  
+  /* Add a little spacing between buttons */
+  .popup-content button[type="submit"],
+  .popup-content button[type="button"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 300px;
+  }
+  
+  /* Responsive font scaling */
+  @media (max-width: 400px) {
+    .popup-content h2 {
+      font-size: 1.5rem;
+    }
+    .popup-content button[type="submit"],
+    .popup-content button[type="button"] {
+      font-size: 1rem;
+    }
+  }
+  
+  /* Add a gentle box shadow on popup hover/focus */
+  .popup-content:hover,
+  .popup-content:focus-within {
+    box-shadow: 0 12px 32px rgba(0, 166, 166, 0.3);
+  }
+  
+  /* Add subtle error state for inputs */
+  .popup-content input:invalid {
+    border-color: #e74c3c; /* bright red */
+    box-shadow: 0 0 5px #e74c3c;
+  }
+  
+  /* Accessibility: focus-visible outlines */
+  .popup-content input:focus-visible,
+  .popup-content button:focus-visible {
+    outline: 2px solid var(--light-sea-green);
+    outline-offset: 2px;
+  }
+  
