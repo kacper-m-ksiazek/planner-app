@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planer Energii - Mockup</title>
+  <link rel="stylesheet" href="style/variables.css">
+  <link rel="stylesheet" href="style/main.css">
+</head>
+
+<body>
+  <!-- Header / Menu -->
+  <header class="main-header">
+    <h1>Planer Energii</h1>
+    <nav>
+      <ul>
+        <li><a href="#login">Logowanie</a></li>
+        <li><a href="#register">Rejestracja</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Login Section -->
+  <section id="login" class="form-section">
+    <h2>Logowanie</h2>
+    <form>
+      <label for="email">Email</label>
+      <input type="email" id="email" />
+      <label for="password">Hasło</label>
+      <input type="password" id="password" />
+      <button onclick="location.href='#dashboard'" type="button">Zaloguj</button>
+    </form>
+  </section>
+
+  <!-- Register Section -->
+  <section id="register" class="form-section">
+    <h2>Rejestracja</h2>
+    <form>
+      <label for="new-email">Email</label>
+      <input type="email" id="new-email" />
+      <label for="new-password">Hasło</label>
+      <input type="password" id="new-password" />
+      <button onclick="location.href='#dashboard'" type="button">Zarejestruj</button>
+    </form>
+  </section>
+
+  <!-- Dashboard Section -->
+  <section id="dashboard" class="dashboard">
+    <h2>Planowanie zużycia energii</h2>
+    <div class="device-config">
+      <h3>Urządzenia</h3>
+      <div class="device" draggable="true" data-duration="30">Pralka</div>
+      <div class="device" draggable="true" data-duration="45">Zmywarka</div>
+      <div class="device" draggable="true" data-duration="60">Piekarnik</div>
+    </div>
+
+    <div class="planner">
+      <div class="forecast-bar">
+        <h4>Prognoza nasłonecznienia</h4>
+        <div class="forecast-chart">
+          <!-- fake bars -->
+          <div class="bar" style="height: 40%"></div>
+          <div class="bar" style="height: 70%"></div>
+          <div class="bar" style="height: 100%"></div>
+          <div class="bar" style="height: 50%"></div>
+        </div>
+      </div>
+
+      <div class="schedule-grid" aria-label="Siatka planowania">
+        <h4>Harmonogram</h4>
+        <div class="schedule-track"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <p>&copy; 2025 Kacper Książek - Aplikacja do planowania energii</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="scripts/drag-n-drop.js"></script>
+</body>
+
+</html>
