@@ -1,0 +1,124 @@
+/* forms.css */
+
+:root {
+    --tangerine: #f08700;
+    --gamboge: #f49f0a;
+    --jonquil: #efca08;
+    --light-sea-green: #00a6a6;
+    --columbia-blue: #bbdef0;
+  }
+  
+  /* Popup overlay */
+  .popup {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  /* Popup box */
+  .popup-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    width: 90%;
+    max-width: 400px;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    animation: fadeInScale 0.3s ease forwards;
+  }
+  
+  /* Headings */
+  .popup-content h2 {
+    margin-bottom: 1.5rem;
+    color: var(--light-sea-green);
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8rem;
+  }
+  
+  /* Form labels */
+  .popup-content label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: var(--tangerine);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+  }
+  
+  /* Inputs */
+  .popup-content input[type="email"],
+  .popup-content input[type="password"] {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1.2rem;
+    border: 2px solid var(--columbia-blue);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #222;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .popup-content input[type="email"]:focus,
+  .popup-content input[type="password"]:focus {
+    border-color: var(--light-sea-green);
+    outline: none;
+    box-shadow: 0 0 8px var(--light-sea-green);
+  }
+  
+  /* Submit Button */
+  .popup-content button[type="submit"] {
+    background-color: var(--tangerine);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 0.8rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .popup-content button[type="submit"]:hover {
+    background-color: var(--gamboge);
+  }
+  
+  /* Cancel Button */
+  .popup-content button[type="button"] {
+    background-color: transparent;
+    border: 2px solid var(--tangerine);
+    color: var(--tangerine);
+    padding: 0.6rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .popup-content button[type="button"]:hover {
+    background-color: var(--tangerine);
+    color: white;
+  }
+  
+  /* Animation for popup content */
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
