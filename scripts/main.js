@@ -110,9 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
         deviceDiv.dataset.duration = device.duration || '0';
 
         console.debug('deviceDiv.dataset.name:', deviceDiv.dataset.name);
-        console.debug('deviceDiv.dataset.duration:', deviceDiv.dataset.duration);
+        
       
-        deviceDiv.textContent = device.name || 'Unnamed device';
+        deviceDiv.textContent = `${device.type || 'Unknown type'} - ${device.name || 'Unnamed device'} (${device.duration || 0} min)`;
+
       
         if (device.icon) {
           const iconImg = document.createElement('img');

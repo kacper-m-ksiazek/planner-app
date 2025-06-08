@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Planer Energii - Mockup</title>
+  <title>Energy Planner</title>
   <link rel="stylesheet" href="style/variables.css">
   <link rel="stylesheet" href="style/main.css">
   <link rel="stylesheet" href="style/forms.css">
@@ -15,11 +15,11 @@
 <body>
   <!-- Header / Menu -->
   <header class="main-header">
-    <h1>Planer Energii</h1>
+    <h1>Energy Planner</h1>
     <nav>
       <ul>
-        <li><button onclick="openPopup('loginPopup')">Logowanie</button></li>
-        <li><button onclick="openPopup('registerPopup')">Rejestracja</button></li>
+        <li><button onclick="openPopup('loginPopup')">Log in</button></li>
+        <li><button onclick="openPopup('registerPopup')">Register</button></li>
         <li><a href="#" id="dashboardLink" class="hidden">Dashboard</a></li>
       </ul>
     </nav>
@@ -28,13 +28,13 @@
   <!-- Login Popup -->
   <div id="loginPopup" class="popup hidden" role="dialog" aria-modal="true">
     <div class="popup-content">
-      <h2>Logowanie</h2>
+      <h2>Log in</h2>
       <form onsubmit="event.preventDefault(); loginUser();">
         <label for="email">Email</label>
         <input type="email" id="email" required />
-        <label for="password">Hasło</label>
+        <label for="password">Password</label>
         <input type="password" id="password" required />
-        <button type="submit">Zaloguj</button>
+        <button type="submit">Log in</button>
         <button type="button" onclick="closePopup('loginPopup')">Anuluj</button>
       </form>
     </div>
@@ -43,13 +43,13 @@
   <!-- Register Popup -->
   <div id="registerPopup" class="popup hidden" role="dialog" aria-modal="true">
     <div class="popup-content">
-      <h2>Rejestracja</h2>
+      <h2>Register</h2>
       <form onsubmit="event.preventDefault(); loginUser();">
         <label for="new-email">Email</label>
         <input type="email" id="new-email" required />
-        <label for="new-password">Hasło</label>
+        <label for="new-password">Password</label>
         <input type="password" id="new-password" required />
-        <button type="submit">Zarejestruj</button>
+        <button type="submit">Register</button>
         <button type="button" onclick="closePopup('registerPopup')">Anuluj</button>
       </form>
     </div>
@@ -57,9 +57,9 @@
 
   <!-- Dashboard Section -->
   <section id="dashboard" class="dashboard hidden">
-    <h2>Planowanie zużycia energii</h2>
+    <h2>Planning of Energy Usage</h2>
     <div class="device-config">
-      <h3>Urządzenia</h3>
+      <h3>Devices</h3>
       <input type="text" id="deviceSearch" placeholder="Szukaj urządzenia..." aria-label="Szukaj urządzenia" />
       <div id="deviceList">
       </div>
@@ -68,7 +68,7 @@
 
     <div class="planner">
       <div class="forecast-bar">
-        <h4>Prognoza nasłonecznienia</h4>
+        <h4>Solar Energy Production Forecast</h4>
         <div class="forecast-chart">
           <div class="bar" style="height: 40%"></div>
           <div class="bar" style="height: 70%"></div>
@@ -77,8 +77,8 @@
         </div>
       </div>
 
-      <div class="schedule-grid" aria-label="Siatka planowania">
-        <h4>Harmonogram</h4>
+      <div class="schedule-grid" aria-label="Schedule Grid">
+        <h4>Schedule</h4>
         <div class="time-ruler">
           <div class="time-slot" data-hour="0">00:00</div>
           <div class="time-slot" data-hour="1">01:00</div>
@@ -113,7 +113,7 @@
 
   <!-- Footer -->
   <footer class="main-footer">
-    <p>&copy; 2025 Kacper Książek - Aplikacja do planowania energii</p>
+    <p>&copy; 2025 Kacper Książek - Energy Planner App</p>
   </footer>
 
   <!-- Scripts -->
