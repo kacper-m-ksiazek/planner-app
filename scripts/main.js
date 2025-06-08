@@ -144,3 +144,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 window.openPopup = openPopup;
 window.closePopup = closePopup;
+window.loginUser = loginUser;
