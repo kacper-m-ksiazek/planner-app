@@ -1,6 +1,13 @@
 // Constants
 const PIXELS_PER_HOUR = 60; // 60px per hour on timeline
 const SCHEDULE_TRACK_ID = 'schedule-track';
+const ROW_HEIGHT = 50; // height per row for blocks, including margin
+const MAX_ROWS = 5;    // max number of rows allowed
+
+// Helper: check if two blocks overlap horizontally
+function isOverlapping(start1, width1, start2, width2) {
+  return start1 < (start2 + width2) && (start1 + width1) > start2;
+}
 
 // Store scheduled devices
 let scheduledDevices = [];
@@ -58,36 +65,57 @@ function onDrop(e) {
 }
 
 function addScheduledBlock({ deviceName, startHour, startMinutes, duration }) {
-  const scheduleTrack = document.querySelector('.schedule-track');
-
-  // Convert start time and duration to pixels
-  const startX = startHour * PIXELS_PER_HOUR + (startMinutes / 60) * PIXELS_PER_HOUR;
-  const width = (duration / 60) * PIXELS_PER_HOUR;
-
-  // Create block element
-  const block = document.createElement('div');
-  block.classList.add('scheduled-block');
-  block.style.left = `${startX}px`;
-  block.style.width = `${width}px`;
-  block.dataset.deviceName = deviceName;
-  block.dataset.startHour = startHour;
-  block.dataset.startMinutes = startMinutes;
-  block.dataset.duration = duration;
-
-  // Content and resize handle
-  block.innerHTML = `
-    <span class="block-label">${deviceName} (${duration} min)</span>
-    <div class="resize-handle"></div>
-  `;
-
-  scheduleTrack.appendChild(block);
-
-  // Store scheduled device info
-  scheduledDevices.push(block);
-
-  // Enable dragging and resizing for the new block
-  setupBlockDragAndResize(block);
-}
+    const scheduleTrack = document.querySelector('.schedule-track');
+  
+    // Convert start time and duration to pixels
+    const startX = startHour * PIXELS_PER_HOUR + (startMinutes / 60) * PIXELS_PER_HOUR;
+    const width = (duration / 60) * PIXELS_PER_HOUR;
+  
+    // Find free row
+    let row = 0;
+    for (; row < MAX_ROWS; row++) {
+      // Check overlap with blocks on this row
+      const rowBlocks = scheduledDevices.filter(b => parseInt(b.dataset.row) === row);
+      const overlap = rowBlocks.some(b => {
+        const bLeft = parseFloat(b.style.left);
+        const bWidth = parseFloat(b.style.width);
+        return isOverlapping(startX, width, bLeft, bWidth);
+      });
+      if (!overlap) break; // found free row
+    }
+  
+    if (row === MAX_ROWS) {
+      alert('Brak dostępnego miejsca na harmonogramie!');
+      return; // no space
+    }
+  
+    // Create block element
+    const block = document.createElement('div');
+    block.classList.add('scheduled-block');
+    block.style.left = `${startX}px`;
+    block.style.width = `${width}px`;
+    block.style.top = `${row * ROW_HEIGHT + 10}px`; // vertical pos based on row
+    block.dataset.deviceName = deviceName;
+    block.dataset.startHour = startHour;
+    block.dataset.startMinutes = startMinutes;
+    block.dataset.duration = duration;
+    block.dataset.row = row;
+  
+    // Content and resize handle
+    block.innerHTML = `
+      <span class="block-label">${deviceName} (${duration} min)</span>
+      <div class="resize-handle"></div>
+    `;
+  
+    scheduleTrack.appendChild(block);
+  
+    // Store scheduled device info
+    scheduledDevices.push(block);
+  
+    // Enable dragging and resizing for the new block
+    setupBlockDragAndResize(block);
+  }
+  
 
 function setupBlockDragAndResize(block) {
   let isDragging = false;
@@ -132,27 +160,44 @@ function startDrag(e, block, scheduleTrack) {
 }
 
 function onDragMove(e) {
-  if (!dragInfo || dragInfo.type !== 'drag') return;
-  const { block, startX, startLeft } = dragInfo;
-  const deltaX = e.clientX - startX;
-  let newLeft = startLeft + deltaX;
-
-  // Boundaries: prevent block moving left beyond 0 or right beyond timeline width
-  newLeft = Math.max(0, newLeft);
-  const scheduleTrack = document.querySelector('.schedule-track');
-  const maxLeft = scheduleTrack.clientWidth - block.clientWidth;
-  newLeft = Math.min(maxLeft, newLeft);
-
-  block.style.left = `${newLeft}px`;
-
-  // Update startHour and startMinutes data attributes
-  const totalMinutes = (newLeft / PIXELS_PER_HOUR) * 60;
-  const startHour = Math.floor(totalMinutes / 60);
-  const startMinutes = Math.floor(totalMinutes % 60);
-  block.dataset.startHour = startHour;
-  block.dataset.startMinutes = startMinutes;
-  updateBlockLabel(block);
-}
+    if (!dragInfo || dragInfo.type !== 'drag') return;
+    const { block, startX, startLeft } = dragInfo;
+    const deltaX = e.clientX - startX;
+    let newLeft = startLeft + deltaX;
+  
+    const scheduleTrack = document.querySelector('.schedule-track');
+  
+    // Boundaries: prevent block moving left beyond 0 or right beyond timeline width
+    newLeft = Math.max(0, newLeft);
+    const maxLeft = scheduleTrack.clientWidth - block.clientWidth;
+    newLeft = Math.min(maxLeft, newLeft);
+  
+    // Find free row for this new position
+    let newRow = 0;
+    for (; newRow < MAX_ROWS; newRow++) {
+      const rowBlocks = scheduledDevices.filter(b => parseInt(b.dataset.row) === newRow && b !== block);
+      const overlap = rowBlocks.some(b => {
+        const bLeft = parseFloat(b.style.left);
+        const bWidth = parseFloat(b.style.width);
+        return isOverlapping(newLeft, block.clientWidth, bLeft, bWidth);
+      });
+      if (!overlap) break;
+    }
+    if (newRow === MAX_ROWS) newRow = parseInt(block.dataset.row); // stay in current row if no free
+  
+    block.style.left = `${newLeft}px`;
+    block.style.top = `${newRow * ROW_HEIGHT + 10}px`;
+    block.dataset.row = newRow;
+  
+    // Update startHour and startMinutes data attributes
+    const totalMinutes = (newLeft / PIXELS_PER_HOUR) * 60;
+    const startHour = Math.floor(totalMinutes / 60);
+    const startMinutes = Math.floor(totalMinutes % 60);
+    block.dataset.startHour = startHour;
+    block.dataset.startMinutes = startMinutes;
+    updateBlockLabel(block);
+  }
+  
 
 function onDragEnd(e) {
   if (!dragInfo) return;
