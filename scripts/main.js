@@ -99,23 +99,32 @@ document.addEventListener('DOMContentLoaded', () => {
     deviceList.innerHTML = ''; // Clear existing static devices
 
     devicesList.forEach(device => {
-      const deviceDiv = document.createElement('div');
-      deviceDiv.classList.add('device');
-      deviceDiv.setAttribute('draggable', 'true');
-      deviceDiv.dataset.duration = device.duration;
-      deviceDiv.textContent = device.name;
+        console.debug('Creating device:', device);
+      
+        const deviceDiv = document.createElement('div');
+        deviceDiv.classList.add('device');
+        deviceDiv.setAttribute('draggable', 'true');
+      
+        // Explicitly set dataset properties
+        deviceDiv.dataset.name = device.name || '';
+        deviceDiv.dataset.duration = device.duration || '0';
 
-      // Optional: add device icon if available
-      if (device.icon) {
-        const iconImg = document.createElement('img');
-        iconImg.src = device.icon;
-        iconImg.alt = device.type + ' icon';
-        iconImg.classList.add('device-icon');
-        deviceDiv.prepend(iconImg);
-      }
-
-      deviceList.appendChild(deviceDiv);
-    });
+        console.debug('deviceDiv.dataset.name:', deviceDiv.dataset.name);
+        console.debug('deviceDiv.dataset.duration:', deviceDiv.dataset.duration);
+      
+        deviceDiv.textContent = device.name || 'Unnamed device';
+      
+        if (device.icon) {
+          const iconImg = document.createElement('img');
+          iconImg.src = device.icon;
+          iconImg.alt = device.type ? device.type + ' icon' : 'device icon';
+          iconImg.classList.add('device-icon');
+          deviceDiv.prepend(iconImg);
+        }
+      
+        deviceList.appendChild(deviceDiv);
+      });
+      
   }
 
   // --- DEVICE SEARCH FILTER ---
