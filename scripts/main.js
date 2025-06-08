@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Explicitly set dataset properties
         deviceDiv.dataset.name = device.name || '';
         deviceDiv.dataset.duration = device.duration || '0';
+        deviceDiv.dataset.type = device.type || '';
 
         console.debug('deviceDiv.dataset.name:', deviceDiv.dataset.name);
         

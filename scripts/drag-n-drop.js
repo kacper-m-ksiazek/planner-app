@@ -38,6 +38,7 @@ function onDragStart(e) {
 
   const deviceName = deviceElement.dataset.name;
 const duration = deviceElement.dataset.duration;
+const type = deviceElement.dataset.type || 'unknown';
 
 console.debug('[DragStart] deviceName:', deviceName, 'duration:', duration);
 
@@ -50,12 +51,14 @@ if (!duration) {
 
 e.dataTransfer.setData('deviceName', deviceName);
 e.dataTransfer.setData('duration', duration);
+e.dataTransfer.setData('type', type || 'unknown');
 
 
   console.debug('[DragStart] deviceName:', deviceName, 'duration:', duration);
 
   e.dataTransfer.setData('text/plain', deviceName);
   e.dataTransfer.setData('duration', duration);
+  e.dataTransfer.setData('type', type || 'unknown');
   e.dataTransfer.effectAllowed = 'copy';
 }
 
@@ -73,6 +76,7 @@ function onDrop(e) {
   const deviceName = e.dataTransfer.getData('text/plain');
   const durationRaw = e.dataTransfer.getData('duration');
   const duration = parseInt(durationRaw, 10);
+  const type = e.dataTransfer.getData('type') || 'unknown';
 
   console.debug('[Drop] deviceName:', deviceName, 'raw duration:', durationRaw, 'parsed duration:', duration);
 
@@ -88,13 +92,14 @@ function onDrop(e) {
 
   addScheduledBlock({
     deviceName,
+    type,
     startHour,
     startMinutes,
     duration: isNaN(duration) ? 0 : duration,
   });
 }
 
-function addScheduledBlock({ deviceName, startHour, startMinutes, duration }) {
+function addScheduledBlock({ deviceName, type, startHour, startMinutes, duration }) {
   const scheduleTrack = document.querySelector('.schedule-track');
 
   // Convert start time and duration to pixels
@@ -127,13 +132,14 @@ function addScheduledBlock({ deviceName, startHour, startMinutes, duration }) {
   block.style.width = `${width}px`;
   block.style.top = `${row * ROW_HEIGHT + 10}px`;
   block.dataset.deviceName = deviceName;
+  block.dataset.type = type || 'unknown';
   block.dataset.startHour = startHour;
   block.dataset.startMinutes = startMinutes;
   block.dataset.duration = duration;
   block.dataset.row = row;
 
   block.innerHTML = `
-    <span class="block-label">${deviceName} (${duration} min)</span>
+    <span class="block-label">${type} (${duration} min)</span>
     <div class="resize-handle"></div>
   `;
 
