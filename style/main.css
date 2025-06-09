@@ -485,3 +485,150 @@ section {
 .hidden {
     display: none !important;
 }
+
+/* ===================================
+   Dark Mode Overrides
+=================================== */
+body.dark {
+    background: #121212;
+    color: #e0e0e0;
+}
+
+body.dark header.main-header,
+body.dark footer.main-footer {
+    background: #1e3d3d;
+    color: var(--white);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+body.dark nav a {
+    color: #eee;
+}
+
+body.dark nav a:hover,
+body.dark nav a:focus {
+    color: var(--jonquil);
+}
+
+body.dark nav a::after {
+    background: var(--jonquil);
+}
+
+body.dark .form-section {
+    background: #1e1e1e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+body.dark .form-section input {
+    background: #2b2b2b;
+    border-color: #444;
+    color: #eee;
+}
+
+body.dark .form-section input:focus {
+    border-color: var(--light-sea-green);
+    box-shadow: 0 0 6px var(--light-sea-green);
+}
+
+body.dark .form-section button {
+    background: var(--gamboge);
+    color: #000;
+    box-shadow: 0 4px 12px rgba(250, 218, 94, 0.3);
+}
+
+body.dark .form-section button:hover {
+    background: var(--tangerine);
+    box-shadow: 0 6px 16px rgba(250, 218, 94, 0.5);
+}
+
+body.dark .dashboard {
+    color: #ddd;
+}
+
+body.dark .device {
+    background: #3e3e1f;
+    color: #fada5e;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .device:hover {
+    background: #5c4f1c;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+body.dark .planner {
+    color: #eaeaea;
+}
+
+body.dark .time-ruler {
+    background: #2a2a2a;
+    color: #ccc;
+    border-color: #444;
+}
+
+body.dark .time-slot {
+    border-right: 1px solid #444;
+}
+
+body.dark .time-slot:hover {
+    background-color: rgba(32, 178, 170, 0.3);
+}
+
+body.dark .schedule-track {
+    background: #202020;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .schedule-grid {
+    background: #2b2b2b;
+    border-color: var(--gamboge);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+body.dark .scheduled-block {
+    background-color: #17817b;
+    box-shadow: 0 2px 8px rgba(23, 129, 123, 0.5);
+}
+
+body.dark .scheduled-block:hover {
+    background-color: #145d58;
+    box-shadow: 0 4px 14px rgba(20, 93, 88, 0.8);
+}
+
+body.dark .scheduled-block .resize-handle {
+    background: #ccc;
+}
+
+body.dark .scheduled-block .resize-handle:hover {
+    background-color: #fff;
+    box-shadow: 0 0 8px var(--light-sea-green);
+}
+
+body.dark .popup-content {
+    background: #222;
+    color: #eee;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+}
+
+body.dark .device-card {
+    background: #2a2a2a;
+    border-color: #444;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    color: #eee;
+}
+
+body.dark .device-card:hover {
+    background-color: #355f5f;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+
+body.dark #deviceSearch {
+    background: #2b2b2b;
+    border-color: #555;
+    color: #eee;
+}
+
+body.dark #deviceList {
+    background: #2a2a2a;
+    border-color: #444;
+}
