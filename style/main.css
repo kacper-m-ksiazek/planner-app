@@ -632,3 +632,62 @@ body.dark #deviceList {
     background: #2a2a2a;
     border-color: #444;
 }
+
+/* ===================================
+   Accessibility Font Size Overrides
+=================================== */
+
+/* Default font size */
+:root {
+    --font-size-base: 16px; /* base font size */
+}
+
+/* Small font size */
+.font-size-small {
+    --font-size-base: 14px;
+}
+
+/* Medium font size (default) */
+.font-size-medium {
+    --font-size-base: 16px;
+}
+
+/* Large font size */
+.font-size-large {
+    --font-size-base: 18px;
+}
+
+/* Apply the font size variable */
+body,
+button,
+input,
+select,
+textarea,
+section,
+header,
+footer,
+nav,
+.dashboard,
+.device,
+.device-card,
+.scheduled-block,
+.planner,
+.form-section {
+    font-size: var(--font-size-base);
+    /* Adjust line-height if needed */
+    line-height: 1.4;
+}
+
+/* Optionally, for smaller elements you can tweak font sizes */
+.device {
+    font-size: calc(var(--font-size-base) * 0.9);
+}
+
+.scheduled-block {
+    font-size: calc(var(--font-size-base) * 0.85);
+}
+
+.form-section input,
+.form-section button {
+    font-size: var(--font-size-base);
+}

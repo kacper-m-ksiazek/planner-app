@@ -20,8 +20,13 @@ function showDashboardUI() {
   const dashboardLink = document.getElementById('dashboardLink');
   dashboardLink.classList.remove('hidden');
 
-  // Ukryj przyciski logowania i rejestracji, ale nie toggle dark mode
-  document.querySelectorAll('nav ul li button:not(#darkModeToggle)').forEach(btn => btn.style.display = 'none');
+  // Ukryj przyciski logowania i rejestracji, ale NIE toggle dark mode oraz NIE przyciski zmiany rozmiaru czcionki
+  document.querySelectorAll('nav ul li button').forEach(btn => {
+    // Hide login and register buttons only
+    if (btn.textContent === 'Log in' || btn.textContent === 'Register') {
+      btn.style.display = 'none';
+    }
+  });
 
   // Dodaj przycisk wylogowania tylko jeśli go nie ma
   if (!document.getElementById('logoutBtn')) {
@@ -42,8 +47,12 @@ function hideDashboardUI() {
 
   document.getElementById('dashboardLink').classList.add('hidden');
 
-  // Pokaż przyciski logowania i rejestracji, ale nie toggle dark mode
-  document.querySelectorAll('nav ul li button:not(#darkModeToggle)').forEach(btn => btn.style.display = '');
+  // Pokaż przyciski logowania i rejestracji, ale nie toggle dark mode oraz nie przyciski zmiany rozmiaru czcionki
+  document.querySelectorAll('nav ul li button').forEach(btn => {
+    if (btn.textContent === 'Log in' || btn.textContent === 'Register') {
+      btn.style.display = '';
+    }
+  });
 
   // Usuń przycisk wylogowania
   const logoutBtn = document.getElementById('logoutBtn');
@@ -51,7 +60,6 @@ function hideDashboardUI() {
     logoutBtn.parentElement.remove();
   }
 }
-
 
 // Symulacja logowania / rejestracji
 function loginUser() {
@@ -99,34 +107,31 @@ document.addEventListener('DOMContentLoaded', () => {
     deviceList.innerHTML = ''; // Clear existing static devices
 
     devicesList.forEach(device => {
-        console.debug('Creating device:', device);
-      
-        const deviceDiv = document.createElement('div');
-        deviceDiv.classList.add('device');
-        deviceDiv.setAttribute('draggable', 'true');
-      
-        // Explicitly set dataset properties
-        deviceDiv.dataset.name = device.name || '';
-        deviceDiv.dataset.duration = device.duration || '0';
-        deviceDiv.dataset.type = device.type || '';
+      console.debug('Creating device:', device);
 
-        console.debug('deviceDiv.dataset.name:', deviceDiv.dataset.name);
-        
-      
-        deviceDiv.textContent = `${device.type || 'Unknown type'} - ${device.name || 'Unnamed device'} (${device.duration || 0} min)`;
+      const deviceDiv = document.createElement('div');
+      deviceDiv.classList.add('device');
+      deviceDiv.setAttribute('draggable', 'true');
 
-      
-        if (device.icon) {
-          const iconImg = document.createElement('img');
-          iconImg.src = device.icon;
-          iconImg.alt = device.type ? device.type + ' icon' : 'device icon';
-          iconImg.classList.add('device-icon');
-          deviceDiv.prepend(iconImg);
-        }
-      
-        deviceList.appendChild(deviceDiv);
-      });
-      
+      // Explicitly set dataset properties
+      deviceDiv.dataset.name = device.name || '';
+      deviceDiv.dataset.duration = device.duration || '0';
+      deviceDiv.dataset.type = device.type || '';
+
+      console.debug('deviceDiv.dataset.name:', deviceDiv.dataset.name);
+
+      deviceDiv.textContent = `${device.type || 'Unknown type'} - ${device.name || 'Unnamed device'} (${device.duration || 0} min)`;
+
+      if (device.icon) {
+        const iconImg = document.createElement('img');
+        iconImg.src = device.icon;
+        iconImg.alt = device.type ? device.type + ' icon' : 'device icon';
+        iconImg.classList.add('device-icon');
+        deviceDiv.prepend(iconImg);
+      }
+
+      deviceList.appendChild(deviceDiv);
+    });
   }
 
   // --- DEVICE SEARCH FILTER ---
@@ -142,11 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-});
 
-document.addEventListener('DOMContentLoaded', () => {
-  // existing code...
-
+  // --- DARK MODE TOGGLE ---
   const toggle = document.getElementById('darkModeToggle');
   const body = document.body;
 
@@ -166,8 +168,29 @@ document.addEventListener('DOMContentLoaded', () => {
       toggle.textContent = isDark ? '☀️' : '🌙';
     });
   }
+
+  // --- FONT SIZE BUTTONS ---
+  const fontIncreaseBtn = document.getElementById('fontIncreaseBtn');
+  const fontDecreaseBtn = document.getElementById('fontDecreaseBtn');
+
+  if (fontIncreaseBtn && fontDecreaseBtn) {
+    fontIncreaseBtn.addEventListener('click', () => {
+      changeFontSize(1);
+    });
+    fontDecreaseBtn.addEventListener('click', () => {
+      changeFontSize(-1);
+    });
+  }
+
+  // Initialize font size
+  let currentFontSize = 16;
+  function changeFontSize(delta) {
+    currentFontSize = Math.min(30, Math.max(12, currentFontSize + delta));
+    document.documentElement.style.fontSize = currentFontSize + 'px';
+  }
 });
 
 window.openPopup = openPopup;
 window.closePopup = closePopup;
 window.loginUser = loginUser;
+window.logoutUser = logoutUser;
