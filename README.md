@@ -17,8 +17,6 @@ A modern web app to help users plan and optimize their home energy usage by sche
 
 ![Energy Planner Screenshot](./images/preview.png)
 
-> (You can replace this image path with your hosted preview or an actual screenshot from the app.)
-
 ## 🛠️ Tech Stack
 
 - HTML5 / CSS3
