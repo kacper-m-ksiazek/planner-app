@@ -20,8 +20,8 @@ function showDashboardUI() {
   const dashboardLink = document.getElementById('dashboardLink');
   dashboardLink.classList.remove('hidden');
 
-  // Ukryj przyciski logowania i rejestracji
-  document.querySelectorAll('nav ul li button').forEach(btn => btn.style.display = 'none');
+  // Ukryj przyciski logowania i rejestracji, ale nie toggle dark mode
+  document.querySelectorAll('nav ul li button:not(#darkModeToggle)').forEach(btn => btn.style.display = 'none');
 
   // Dodaj przycisk wylogowania tylko jeśli go nie ma
   if (!document.getElementById('logoutBtn')) {
@@ -35,7 +35,6 @@ function showDashboardUI() {
   }
 }
 
-// Ukrywa elementy po wylogowaniu
 function hideDashboardUI() {
   const dashboard = document.getElementById('dashboard');
   dashboard.classList.add('hidden');
@@ -43,8 +42,8 @@ function hideDashboardUI() {
 
   document.getElementById('dashboardLink').classList.add('hidden');
 
-  // Pokaż przyciski logowania i rejestracji
-  document.querySelectorAll('nav ul li button').forEach(btn => btn.style.display = '');
+  // Pokaż przyciski logowania i rejestracji, ale nie toggle dark mode
+  document.querySelectorAll('nav ul li button:not(#darkModeToggle)').forEach(btn => btn.style.display = '');
 
   // Usuń przycisk wylogowania
   const logoutBtn = document.getElementById('logoutBtn');
@@ -52,6 +51,7 @@ function hideDashboardUI() {
     logoutBtn.parentElement.remove();
   }
 }
+
 
 // Symulacja logowania / rejestracji
 function loginUser() {
