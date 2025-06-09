@@ -92,98 +92,51 @@ section {
     overflow-x: auto;
 }
 
-
-/* Scroll container setup */
 .scroll-container {
     overflow-x: auto;
     padding-bottom: 1rem;
     width: 100%;
     box-sizing: border-box;
-    -webkit-overflow-scrolling: touch; /* smoother scrolling on iOS */
-    min-width: 960px;       /* force min width */
-    /* Remove white-space: nowrap; as children are grid blocks */
+    -webkit-overflow-scrolling: touch;
+    min-width: 960px;
 }
 
-/* Grid containers with fixed 24 columns each 40px wide */
-.forecast-chart,
-.time-ruler,
-.schedule-track {
-    display: grid;  /* block grid, not inline */
-    grid-template-columns: repeat(24, 40px);
-    gap: 0;
-    width: 960px !important;
-    min-width: 960px !important;
-    max-width: 960px !important;
-    box-sizing: border-box;
-    flex-shrink: 0;
-}
-
-/* For safety, ensure inner elements fill grid columns exactly */
-.forecast-chart > .bar,
-.time-ruler > .time-slot,
-.schedule-track > div {
-    margin: 0;
-    padding: 0;
-    width: 40px;
-    box-sizing: border-box;
-}
-
-.forecast-chart {
-    height: 100px;
-    align-items: flex-end;
-    margin-bottom: 0;
-    padding: 0.5rem 0;
-    box-sizing: border-box;
-}
-
-/* Bars fill 100% width exactly */
-.bar {
-    width: 40px; /* fixed to grid column width */
-    margin: 0;
-    background: var(--light-sea-green);
-    border-radius: 2px;
-    transition: height 0.3s ease;
-}
-
-/* Time ruler container background fill */
 .time-ruler {
-    background: #f0f4f8;
-    border-radius: 6px 6px 0 0;
-    padding: 0.25rem 0;
-    margin-bottom: 0;
+    display: flex;
+    border-bottom: 1px solid var(--columbia-blue);
+    background: var(--columbia-blue);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
 }
 
-/* Time slots */
 .time-slot {
-    width: 40px; /* fixed */
-    padding: 0;
-    margin: 0;
+    flex: 0 0 60px;
+    padding: 4px 0;
+    border-right: 1px solid rgba(255,255,255,0.3);
     text-align: center;
-    font-size: 0.75rem;
-    color: #555;
-    user-select: none;
-    line-height: 1.5rem;
     box-sizing: border-box;
-    border-right: 1px solid #ddd; /* optional visual separation */
-    background: #f0f4f8;
 }
 
 .schedule-track {
-    background: var(--columbia-blue);
-    border-radius: 0 0 6px 6px;
-    padding: 1rem 0;
-    min-height: 60px;
+    position: relative;
+    height: 100px;
+    min-width: 1440px;
+    background: #eef6f6;
     box-sizing: border-box;
 }
 
-/* Other styles you had */
 .schedule-grid {
+    position: relative;
+    margin-top: 1rem;
     border: 2px dashed var(--tangerine);
-    min-height: 100px;
-    padding: 1rem;
     background: #fff;
     border-radius: 10px;
-    overflow-x: visible; /* or auto */
+    user-select: none;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 1rem;
     min-width: 960px;
     width: 100%;
     max-width: 100%;
@@ -278,40 +231,52 @@ section {
 
 .scheduled-block {
     position: absolute;
-    height: 45px;
+    top: 10px;
+    height: 40px;
+    background-color: var(--light-sea-green);
+    color: white;
     border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 0 4px;
+    padding: 6px 8px;
+    cursor: grab;
+    font-weight: 600;
     box-sizing: border-box;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
     transition: background 0.3s ease;
-  }
-  
-  .scheduled-block .device-icon {
+}
+
+.scheduled-block:active {
+    cursor: grabbing;
+}
+
+.scheduled-block .resize-handle {
+    width: 8px;
+    height: 100%;
+    background: rgba(255,255,255,0.7);
+    cursor: ew-resize;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.scheduled-block .device-icon {
     width: 28px;
     height: 28px;
-  }
-  
-  .scheduled-block .block-label {
+}
+
+.scheduled-block .block-label {
     display: none;
     font-size: 0.75rem;
-    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
     margin-left: 6px;
-  }
-  
-  .scheduled-block:hover .block-label {
+    white-space: nowrap;
+}
+
+.scheduled-block:hover .block-label {
     display: inline;
-  }
-  
-  .scheduled-block .resize-handle {
-    width: 6px;
-    height: 100%;
-    cursor: ew-resize;
-    background: rgba(0,0,0,0.2);
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  
+}

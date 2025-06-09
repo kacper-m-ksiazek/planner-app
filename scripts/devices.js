@@ -22,7 +22,7 @@ export const devicesList = [
       id: 3,
       name: 'Samsung Smart Refrigerator',
       type: 'refrigerator',
-      duration: 0,
+      duration: 800,
       manufacturer: 'Samsung',
       serial_number: 'SAMRF28CB760012',
       icon: 'icons/refrigerator.svg'
@@ -76,7 +76,7 @@ export const devicesList = [
       id: 9,
       name: 'Haier HRQ16N3BGS Fridge',
       type: 'refrigerator',
-      duration: 0,
+      duration: 800,
       manufacturer: 'Haier',
       serial_number: 'HAIHRQ16N3BGS678',
       icon: 'icons/refrigerator.svg'
