@@ -1,122 +1,257 @@
+/* ===================================
+   Base Styles
+=================================== */
+:root {
+    --font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --radius: 12px;
+
+    /* Colors */
+    --columbia-blue: #c4dfe6;
+    --light-sea-green: #20b2aa;
+    --light-sea-green-dark: #187d76; /* darker for hover/shadows */
+    --tangerine: #f28500;
+    --tangerine-dark: #c26e00; /* deeper for buttons on active */
+    --jonquil: #fada5e;
+    --gamboge: #e49b0f;
+    --gray-light: #e6e6e6;
+    --gray: #ccc;
+    --gray-dark: #888;
+    --white: #ffffff;
+    --black: #000000;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --shadow-medium: rgba(0, 0, 0, 0.12);
+    --shadow-strong: rgba(0, 0, 0, 0.25);
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-base);
     margin: 0;
     background: var(--columbia-blue);
     color: #333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+/* ===================================
+   Layout - Header & Footer
+=================================== */
 header.main-header,
 footer.main-footer {
     background: var(--light-sea-green);
-    color: white;
-    padding: 1em;
+    color: var(--white);
+    padding: 1.25em 1em;
     text-align: center;
+    box-shadow: 0 4px 8px var(--shadow-light);
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    user-select: none;
 }
 
+/* ===================================
+   Navigation
+=================================== */
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 2.5rem;
     padding: 0;
+    margin: 0;
 }
 
 nav a {
-    color: white;
+    color: var(--white);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 0.25rem;
+    transition: color 0.3s ease;
 }
 
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--tangerine);
+    transition: width 0.3s ease;
+}
+
+nav a:hover,
+nav a:focus {
+    color: var(--tangerine);
+}
+
+nav a:hover::after,
+nav a:focus::after {
+    width: 100%;
+}
+
+/* ===================================
+   Sections & Forms
+=================================== */
 section {
-    padding: 2rem;
+    padding: 2.5rem 2rem;
 }
 
 .form-section {
-    background: white;
+    background: var(--white);
     max-width: 400px;
-    margin: 2rem auto;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 2.5rem auto;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 12px var(--shadow-medium);
+    transition: box-shadow 0.3s ease;
+}
+
+.form-section:hover,
+.form-section:focus-within {
+    box-shadow: 0 6px 20px var(--shadow-strong);
 }
 
 .form-section input {
     display: block;
     width: 100%;
-    padding: 0.5rem;
-    margin: 0.5rem 0 1rem 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0 1.2rem 0;
+    border: 1.5px solid var(--gray-light);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-section input:focus {
+    border-color: var(--light-sea-green);
+    box-shadow: 0 0 6px var(--light-sea-green);
+    outline: none;
 }
 
 .form-section button {
     background: var(--tangerine);
-    color: white;
+    color: var(--white);
     border: none;
-    padding: 0.75rem;
-    border-radius: 5px;
+    padding: 0.85rem 1.5rem;
+    border-radius: 8px;
     cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(242, 133, 0, 0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
 }
 
+.form-section button:hover {
+    background: var(--tangerine-dark);
+    box-shadow: 0 6px 16px rgba(194, 110, 0, 0.6);
+    transform: translateY(-2px);
+}
+
+.form-section button:active {
+    background: var(--tangerine-dark);
+    box-shadow: 0 3px 8px rgba(194, 110, 0, 0.8);
+    transform: translateY(0);
+}
+
+/* ===================================
+   Dashboard Layout
+=================================== */
 .dashboard {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 2.5rem;
 }
 
+/* Added flex-wrap so smaller screens work better */
 .device-config {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
+/* ===================================
+   Device Styling
+=================================== */
 .device {
     background: var(--jonquil);
-    padding: 1rem;
-    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
     cursor: grab;
-    transition: transform 0.2s ease;
-    height: 45px;
-    line-height: 45px;
-    margin-bottom: 5px;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 8px;
     overflow: hidden;
+    box-shadow: 0 2px 6px var(--shadow-light);
+    font-weight: 600;
+    user-select: none;
 }
 
-.device:hover {
-    transform: scale(1.05);
+.device:hover,
+.device:focus {
+    transform: scale(1.07);
     background: var(--gamboge);
+    box-shadow: 0 8px 16px var(--shadow-medium);
+    outline: none;
 }
 
+/* ===================================
+   Scheduler & Planner
+=================================== */
 .planner {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
     overflow-x: auto;
 }
 
 .scroll-container {
     overflow-x: auto;
-    padding-bottom: 1rem;
+    padding-bottom: 1.2rem;
     width: 100%;
     box-sizing: border-box;
     -webkit-overflow-scrolling: touch;
     min-width: 960px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--light-sea-green) var(--gray-light);
+}
+
+.scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: var(--light-sea-green);
+    border-radius: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+    background: var(--gray-light);
 }
 
 .time-ruler {
     display: flex;
-    border-bottom: 1px solid var(--columbia-blue);
+    border-bottom: 1.5px solid var(--columbia-blue);
     background: var(--columbia-blue);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 700;
     text-align: center;
+    user-select: none;
+    letter-spacing: 0.05em;
 }
 
 .time-slot {
     flex: 0 0 60px;
-    padding: 4px 0;
-    border-right: 1px solid rgba(238, 167, 12, 0.569);
+    padding: 6px 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
     text-align: center;
     box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+
+.time-slot:hover {
+    background-color: rgba(32, 178, 170, 0.2);
 }
 
 .schedule-track {
@@ -125,159 +260,228 @@ section {
     min-width: 1440px;
     background: #eef6f6;
     box-sizing: border-box;
+    border-radius: var(--radius);
+    box-shadow: inset 0 0 8px var(--shadow-light);
 }
 
 .schedule-grid {
     position: relative;
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     border: 2px dashed var(--tangerine);
-    background: #fff;
-    border-radius: 10px;
+    background: var(--white);
+    border-radius: var(--radius);
     user-select: none;
     overflow-x: auto;
     white-space: nowrap;
-    padding: 1rem;
+    padding: 1.25rem;
     min-width: 960px;
     width: 100%;
     max-width: 100%;
+    box-shadow: 0 2px 10px var(--shadow-light);
 }
 
-.hidden {
-    display: none !important;
-}
-
-.popup {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.popup-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    width: 90%;
-    max-width: 400px;
-}
-
-.device-search {
-    margin-top: 1rem;
-}
-
-.device-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 0.5rem;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.device-card {
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    padding: 0.5rem;
-    background: #f8f8f8;
-    cursor: grab;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.device-card:hover {
-    background-color: #e0f7fa;
-}
-
-.device-card img.icon {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 0.5rem;
-}
-
-.device-card .info {
-    text-align: center;
-    font-size: 0.85rem;
-}
-
-#deviceSearch {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    border: 1px solid var(--gray);
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
-.device-config input#deviceSearch {
-    width: 150px;
-    max-width: 100%;
-    height: 36px;
-    box-sizing: border-box;
-    margin-bottom: 8px;
-    display: block;
-    flex-shrink: 0;
-}
-
-#deviceList {
-    max-height: 250px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 5px;
-}
-
+/* ===================================
+   Scheduled Block
+=================================== */
 .scheduled-block {
     position: absolute;
     top: 10px;
-    height: 40px;
+    height: 44px;
     background-color: var(--light-sea-green);
-    color: white;
-    border-radius: 6px;
-    padding: 6px 8px;
+    color: var(--white);
+    border-radius: 8px;
+    padding: 8px 12px;
     cursor: grab;
-    font-weight: 600;
+    font-weight: 700;
     box-sizing: border-box;
     user-select: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.85rem;
-    transition: background 0.3s ease;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(32, 178, 170, 0.5);
 }
 
 .scheduled-block:active {
     cursor: grabbing;
+    box-shadow: 0 6px 14px rgba(32, 178, 170, 0.8);
+    transform: scale(1.02);
+}
+
+.scheduled-block:hover {
+    background-color: var(--light-sea-green-dark);
+    box-shadow: 0 4px 14px rgba(24, 125, 118, 0.8);
 }
 
 .scheduled-block .resize-handle {
-    width: 8px;
+    width: 10px;
     height: 100%;
-    background: rgba(255,255,255,0.7);
+    background: rgba(255, 255, 255, 0.9);
     cursor: ew-resize;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.scheduled-block .resize-handle:hover {
+    background-color: var(--white);
+    box-shadow: 0 0 8px var(--light-sea-green);
 }
 
 .scheduled-block .device-icon {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
 }
 
 .scheduled-block .block-label {
     display: none;
-    font-size: 0.75rem;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-left: 6px;
+    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.65);
+    color: var(--white);
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-left: 8px;
     white-space: nowrap;
+    user-select: none;
 }
 
 .scheduled-block:hover .block-label {
     display: inline;
-    color: red !important;
+}
+
+/* ===================================
+   Popup / Modal
+=================================== */
+.popup {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(4px);
+}
+
+.popup-content {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 8px 20px var(--shadow-strong);
+    transition: transform 0.3s ease;
+}
+
+/* ===================================
+   Device Search + List
+=================================== */
+.device-search {
+    margin-top: 1.25rem;
+}
+
+.device-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.75rem;
+    max-height: 420px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--light-sea-green) var(--gray-light);
+}
+
+.device-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.device-list::-webkit-scrollbar-thumb {
+    background-color: var(--light-sea-green);
+    border-radius: 8px;
+}
+
+.device-list::-webkit-scrollbar-track {
+    background: var(--gray-light);
+}
+
+.device-card {
+    border: 1px solid var(--gray);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    background: #fafafa;
+    cursor: grab;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 1px 4px var(--shadow-light);
+    user-select: none;
+}
+
+.device-card:hover,
+.device-card:focus {
+    background-color: #e0f7fa;
+    box-shadow: 0 6px 16px rgba(32, 178, 170, 0.4);
+    outline: none;
+}
+
+.device-card img.icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 0.6rem;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.05));
+}
+
+.device-card .info {
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #222;
+}
+
+/* Inputs */
+#deviceSearch {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    margin-bottom: 1.2rem;
+    border: 1.5px solid var(--gray-light);
+    border-radius: 10px;
+    font-size: 1.05rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#deviceSearch:focus {
+    border-color: var(--light-sea-green);
+    box-shadow: 0 0 8px var(--light-sea-green);
+    outline: none;
+}
+
+/* device-config search input overrides */
+.device-config input#deviceSearch {
+    width: 170px;
+    max-width: 100%;
+    height: 38px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* device list container */
+#deviceList {
+    max-height: 260px;
+    overflow-y: auto;
+    border: 1px solid var(--gray-light);
+    padding: 8px;
+    border-radius: var(--radius);
+}
+
+/* ===================================
+   Utilities
+=================================== */
+.hidden {
+    display: none !important;
 }
