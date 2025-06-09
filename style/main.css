@@ -484,6 +484,9 @@ section {
     margin: 2rem auto;
     max-width: 500px;
     padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
   
   .welcome-section img {
@@ -756,3 +759,72 @@ nav,
 .form-section button {
     font-size: var(--font-size-base);
 }
+
+/* Base button style for header nav buttons */
+.main-header nav ul li button {
+    background-color: var(--light-sea-green);
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 128, 102, 0.4);
+    user-select: none;
+  }
+  
+  /* Hover state */
+  .main-header nav ul li button:hover,
+  .main-header nav ul li button:focus {
+    background-color: #179c7d; /* slightly darker green */
+    box-shadow: 0 4px 12px rgba(23, 156, 125, 0.6);
+    outline: none;
+  }
+  
+  /* Active / pressed state */
+  .main-header nav ul li button:active {
+    background-color: #127a60;
+    box-shadow: 0 2px 4px rgba(18, 122, 96, 0.8);
+    transform: translateY(1px);
+  }
+  
+  /* Dark mode tweaks */
+  body.dark .main-header nav ul li button {
+    background-color: #26b08d;
+    box-shadow: 0 2px 6px rgba(38, 176, 141, 0.6);
+    color: #eee;
+  }
+  
+  body.dark .main-header nav ul li button:hover,
+  body.dark .main-header nav ul li button:focus {
+    background-color: #1f8a6f;
+    box-shadow: 0 4px 12px rgba(31, 138, 111, 0.8);
+  }
+  
+  /* Specific style for the dark mode toggle (smaller, emoji centered) */
+  #darkModeToggle {
+    padding: 0.3rem 0.7rem;
+    font-size: 1.2rem;
+    line-height: 1;
+    border-radius: 6px;
+  }
+  
+  /* Font size buttons consistent but slightly smaller */
+  #fontIncreaseBtn, #fontDecreaseBtn {
+    padding: 0.3rem 0.8rem;
+    font-weight: 700;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    min-width: 2.6rem;
+  }
+  
+  /* Disabled state example */
+  .main-header nav ul li button:disabled {
+    background-color: #bbb;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
