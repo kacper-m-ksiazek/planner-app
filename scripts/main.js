@@ -28,7 +28,7 @@ function showDashboardUI() {
     const logoutLi = document.createElement('li');
     const logoutBtn = document.createElement('button');
     logoutBtn.id = 'logoutBtn';
-    logoutBtn.textContent = 'Wyloguj';
+    logoutBtn.textContent = 'Logout';
     logoutBtn.onclick = logoutUser;
     logoutLi.appendChild(logoutBtn);
     document.querySelector('nav ul').appendChild(logoutLi);

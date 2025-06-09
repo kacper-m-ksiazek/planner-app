@@ -114,7 +114,7 @@ section {
 .time-slot {
     flex: 0 0 60px;
     padding: 4px 0;
-    border-right: 1px solid rgba(255,255,255,0.3);
+    border-right: 1px solid rgba(238, 167, 12, 0.569);
     text-align: center;
     box-sizing: border-box;
 }
@@ -279,4 +279,5 @@ section {
 
 .scheduled-block:hover .block-label {
     display: inline;
+    color: red !important;
 }
