@@ -479,6 +479,35 @@ section {
     border-radius: var(--radius);
 }
 
+.welcome-section {
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 500px;
+    padding: 1rem;
+  }
+  
+  .welcome-section img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  
+  .welcome-section button {
+    background-color: var(--light-sea-green);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .welcome-section button:hover {
+    background-color: #179c7d;
+  }
+  
+
 /* ===================================
    Utilities
 =================================== */
@@ -632,6 +661,42 @@ body.dark #deviceList {
     background: #2a2a2a;
     border-color: #444;
 }
+
+body.dark .welcome-section {
+    background-color: #222; /* dark background */
+    color: #eee; /* light text */
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
+    padding: 1.5rem;
+    max-width: 500px;
+    margin: 2rem auto;
+    text-align: center;
+  }
+  
+  body.dark .welcome-section img {
+    filter: brightness(0.85); /* slightly dim the image for dark mode */
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  
+  body.dark .welcome-section button {
+    background-color: var(--light-sea-green);
+    border: none;
+    padding: 0.7rem 1.5rem;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 8px var(--light-sea-green);
+  }
+  
+  body.dark .welcome-section button:hover {
+    background-color: #179c7d;
+    box-shadow: 0 0 12px #179c7d;
+  }
+  
 
 /* ===================================
    Accessibility Font Size Overrides

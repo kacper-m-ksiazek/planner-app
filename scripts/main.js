@@ -11,7 +11,6 @@ function closePopup(id) {
   document.getElementById(id).classList.add('hidden');
 }
 
-// Pokazuje elementy po zalogowaniu
 function showDashboardUI() {
   const dashboard = document.getElementById('dashboard');
   dashboard.classList.remove('hidden');
@@ -20,15 +19,14 @@ function showDashboardUI() {
   const dashboardLink = document.getElementById('dashboardLink');
   dashboardLink.classList.remove('hidden');
 
-  // Ukryj przyciski logowania i rejestracji, ale NIE toggle dark mode oraz NIE przyciski zmiany rozmiaru czcionki
-  document.querySelectorAll('nav ul li button').forEach(btn => {
-    // Hide login and register buttons only
-    if (btn.textContent === 'Log in' || btn.textContent === 'Register') {
-      btn.style.display = 'none';
-    }
-  });
+  // Hide login/register buttons but keep dark mode toggle and font size buttons
+  document.querySelectorAll('nav ul li button:not(#darkModeToggle):not(#fontIncreaseBtn):not(#fontDecreaseBtn)').forEach(btn => btn.style.display = 'none');
 
-  // Dodaj przycisk wylogowania tylko jeśli go nie ma
+  // Hide welcome section
+  const welcomeSection = document.getElementById('welcomeSection');
+  if (welcomeSection) welcomeSection.classList.add('hidden');
+
+  // Add logout button if not present
   if (!document.getElementById('logoutBtn')) {
     const logoutLi = document.createElement('li');
     const logoutBtn = document.createElement('button');
@@ -47,19 +45,20 @@ function hideDashboardUI() {
 
   document.getElementById('dashboardLink').classList.add('hidden');
 
-  // Pokaż przyciski logowania i rejestracji, ale nie toggle dark mode oraz nie przyciski zmiany rozmiaru czcionki
-  document.querySelectorAll('nav ul li button').forEach(btn => {
-    if (btn.textContent === 'Log in' || btn.textContent === 'Register') {
-      btn.style.display = '';
-    }
-  });
+  // Show login/register buttons again
+  document.querySelectorAll('nav ul li button:not(#darkModeToggle):not(#fontIncreaseBtn):not(#fontDecreaseBtn)').forEach(btn => btn.style.display = '');
 
-  // Usuń przycisk wylogowania
+  // Show welcome section
+  const welcomeSection = document.getElementById('welcomeSection');
+  if (welcomeSection) welcomeSection.classList.remove('hidden');
+
+  // Remove logout button
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
     logoutBtn.parentElement.remove();
   }
 }
+
 
 // Symulacja logowania / rejestracji
 function loginUser() {
