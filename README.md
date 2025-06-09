@@ -1,5 +1,7 @@
 # ⚡ Energy Planner
 
+https://planner-app-gvub.onrender.com/ (might need to refresh due to free hosting tier)
+
 A modern web app to help users plan and optimize their home energy usage by scheduling devices efficiently. Built with accessibility, responsiveness, and dark mode in mind.
 
 ## 🚀 Features
